@@ -1,15 +1,9 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { useWorkItemContext } from "../contexts/workItemProvider";
+import { WorkItemList } from "../components/WorkItemList";
 
 export default function Add() {
-  const [workItemList, insertWorkItem] = useWorkItemContext();
-
-  const renderedWorkItemList = workItemList.map(() => {});
-
   return (
     <>
       <Head>
@@ -18,7 +12,7 @@ export default function Add() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header header="Track work"></Header>
-
+      <WorkItemList />
       <Footer></Footer>
     </>
   );

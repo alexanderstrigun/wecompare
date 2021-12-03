@@ -1,13 +1,14 @@
 import { createContext, useContext } from "react";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const workItemContext = createContext();
 
 export const WorkItemProvider = ({ children }) => {
-  const [workItemList, setWorkItemList] = useState("");
+  const [workItemList, setWorkItemList] = useState([]);
 
   const insertWorkItem = (newItem) => {
-    setWorkItemList([{ ...newItem }, ...workItemList]);
+    setWorkItemList([{ id: uuidv4(), ...newItem }, ...workItemList]);
   };
   return (
     <workItemContext.Provider value={[workItemList, insertWorkItem]}>

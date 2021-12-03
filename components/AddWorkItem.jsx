@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { useWorkItemContext } from "../contexts/workItemProvider";
+import { renderedOptions } from "../utils/categories";
 
 export const AddWorkItem = () => {
   const [workItemList, insertWorkItem] = useWorkItemContext();
@@ -37,7 +38,9 @@ export const AddWorkItem = () => {
           id="category<"
           name="category"
           value={workItem.category}
-        />
+        >
+          {renderedOptions}
+        </select>
       </div>
       <div>
         <Label htmlFor="time">Estimated time[min]</Label>
