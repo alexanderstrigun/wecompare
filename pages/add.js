@@ -2,7 +2,7 @@ import Head from "next/head";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { AddWorkItem } from "../components/AddWorkItem";
-import { renderedOptions } from "../utils/categories";
+
 
 export default function Add() {
   return (

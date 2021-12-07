@@ -10,6 +10,7 @@ export const AddWorkItem = () => {
     what: "",
     category: "",
     time: "",
+    isChecked: false,
   });
 
   const handleChange = (event) => {
