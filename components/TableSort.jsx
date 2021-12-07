@@ -1,7 +1,17 @@
 import { useState, useEffect } from "react";
 
 export const TableSort = ({ data, setData }) => {
-  const [sortDirection, setSortDirection] = useState("ascending");
+  const [sortDirection, setSortDirection] = useState(null);
+
+  const sortData = () => {
+    if (sortDirection === "ascending") {
+      setSortDirection("descending");
+    } else if (sortDirection === "descending") {
+      setSortDirection("ascending");
+    } else {
+      setSortDirection("ascending");
+    }
+  };
 
   const sortedData = [...data];
   sortedData.sort((a, b) => {
@@ -11,15 +21,6 @@ export const TableSort = ({ data, setData }) => {
       return sortDirection === "ascending" ? 1 : -1;
     }
   });
-
-  const sortData = () => {
-    if (sortDirection === "ascending") {
-      setSortDirection("descending");
-    } else if (sortDirection === "descending") {
-      setSortDirection("ascending");
-    }
-    console.log(sortedData);
-  };
 
   useEffect(() => {
     setData(sortedData);
