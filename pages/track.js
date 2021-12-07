@@ -1,9 +1,12 @@
 import Head from "next/head";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
-import { WorkItemList } from "../components/WorkItemList";
+import { useWorkItemContext } from "../contexts/workItemProvider";
+import { Table } from "../components/Table";
 
-export default function Add() {
+export default function Track() {
+  //import workitemprovider and distrubte to table components
+  const [workItemList, insertWorkItem, setWorkItemList] = useWorkItemContext();
   return (
     <>
       <Head>
@@ -12,7 +15,12 @@ export default function Add() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header header="Track work"></Header>
-      <WorkItemList />
+      <Table
+        data={workItemList}
+        setData={setWorkItemList}
+        hasCheckbox={true}
+        width={"100%"}
+      ></Table>
       <Footer></Footer>
     </>
   );
