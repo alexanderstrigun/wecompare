@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { TableBody } from "./TableBody";
 import { TableHead } from "./TableHead";
 

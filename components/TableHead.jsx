@@ -1,8 +1,9 @@
 import { useCheckAll } from "../utils/useCheckAll";
-import { TableSort } from "./TableSort";
+import { useSort } from "../utils/useSort";
 
 export const TableHead = ({ data, setData, hasCheckbox }) => {
   const { allChecked, toggleAllChecked } = useCheckAll(data, setData);
+  const { requestSort } = useSort(data, setData);
 
   return (
     <thead>
@@ -19,10 +20,16 @@ export const TableHead = ({ data, setData, hasCheckbox }) => {
           </th>
         ) : null}
         <th>
-          What <TableSort data={data} setData={setData} />
+          What
+          <button onClick={() => requestSort("what")}>test</button>
         </th>
-        <th>Category</th>
-        <th>Estimated time</th>
+        <th>
+          Category <button onClick={() => requestSort("category")}>test</button>
+        </th>
+        <th>
+          Estimated time{" "}
+          <button onClick={() => requestSort("time")}>test</button>
+        </th>
       </tr>
     </thead>
   );
