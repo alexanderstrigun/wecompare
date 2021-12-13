@@ -1,4 +1,6 @@
-export const defaultWorkItem = [
+import { v4 as uuidv4 } from "uuid";
+import { uuid } from "uuidv4";
+const defaultWorkItems = [
   { what: "Saugen", category: "Wohnzimmer + Küche", time: "9" },
   { what: "Saugen", category: "Unter coauch", time: "9" },
   { what: "Saugen", category: "Flur", time: "7.5" },
@@ -9,3 +11,7 @@ export const defaultWorkItem = [
   { what: "Saugen", category: "Kleines Bad", time: "3" },
   { what: "Saugen", category: "Treppenhaus", time: "9.5" },
 ];
+
+export const mappedDefaultWorkItems = defaultWorkItems.map((item) => {
+  return { ...item, id: uuidv4(), isChecked: false };
+});

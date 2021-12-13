@@ -1,4 +1,11 @@
-export const TableBody = ({ data, setData, hasCheckbox }) => {
+export const TableBody = ({
+  data,
+  setData,
+  hasCheckbox,
+  fontSize,
+  isTableEditMode,
+  handleEditItemClick,
+}) => {
   const toggleChecked = (id) => {
     const copy = [...data];
     const clickedElement = copy.find((item) => item.id === id);
@@ -8,7 +15,7 @@ export const TableBody = ({ data, setData, hasCheckbox }) => {
 
   const tableBodyRows = data.map(({ what, category, time, id, isChecked }) => {
     return (
-      <tr key={id}>
+      <tr key={id} style={{ fontSize: fontSize }}>
         {hasCheckbox ? (
           <td>
             <input
@@ -23,6 +30,11 @@ export const TableBody = ({ data, setData, hasCheckbox }) => {
         <td>{what}</td>
         <td>{category}</td>
         <td>{time}</td>
+        <td>
+          {isTableEditMode ? (
+            <button onClick={() => handleEditItemClick(id)}>Edit</button>
+          ) : null}
+        </td>
       </tr>
     );
   });

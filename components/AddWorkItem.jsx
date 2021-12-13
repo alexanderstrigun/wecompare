@@ -3,15 +3,17 @@ import styled from "styled-components";
 import { useWorkItemContext } from "../contexts/workItemProvider";
 import { renderedOptions } from "../utils/categories";
 
-export const AddWorkItem = () => {
+export const AddWorkItem = ({ initialAddValue, handleCloseClick }) => {
   const [workItemList, insertWorkItem] = useWorkItemContext();
 
-  const [workItem, setWorkItem] = useState({
-    what: "",
-    category: "",
-    time: "",
-    isChecked: false,
-  });
+  const [workItem, setWorkItem] = useState(
+    initialAddValue ?? {
+      what: "",
+      category: "",
+      time: "",
+      isChecked: false,
+    }
+  );
 
   const handleChange = (event) => {
     setWorkItem({
@@ -22,6 +24,13 @@ export const AddWorkItem = () => {
 
   return (
     <Form>
+      <button
+        onClick={() => {
+          handleCloseClick();
+        }}
+      >
+        Close
+      </button>
       <div>
         <Label htmlFor="what">What?</Label>
         <input

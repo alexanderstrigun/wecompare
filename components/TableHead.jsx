@@ -1,13 +1,13 @@
 import { useCheckAll } from "../utils/useCheckAll";
 import { useSort } from "../utils/useSort";
 
-export const TableHead = ({ data, setData, hasCheckbox }) => {
+export const TableHead = ({ data, setData, hasCheckbox, fontSize }) => {
   const { allChecked, toggleAllChecked } = useCheckAll(data, setData);
   const { requestSort } = useSort(data, setData);
 
   return (
     <thead>
-      <tr>
+      <tr style={{ fontSize: fontSize }}>
         {hasCheckbox ? (
           <th>
             <input
@@ -27,8 +27,7 @@ export const TableHead = ({ data, setData, hasCheckbox }) => {
           Category <button onClick={() => requestSort("category")}>test</button>
         </th>
         <th>
-          Estimated time{" "}
-          <button onClick={() => requestSort("time")}>test</button>
+          Time <button onClick={() => requestSort("time")}>test</button>
         </th>
       </tr>
     </thead>
