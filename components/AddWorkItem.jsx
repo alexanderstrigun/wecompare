@@ -3,8 +3,13 @@ import styled from "styled-components";
 import { useWorkItemContext } from "../contexts/workItemProvider";
 import { renderedOptions } from "../utils/categories";
 
-export const AddWorkItem = ({ initialAddValue, handleCloseClick }) => {
-  const [workItemList, insertWorkItem] = useWorkItemContext();
+export const AddWorkItem = ({
+  initialAddValue,
+  handleCloseClick,
+  isEditMode,
+}) => {
+  const [workItemList, insertWorkItem, setWorkItemList, updateWorkItem] =
+    useWorkItemContext();
 
   const [workItem, setWorkItem] = useState(
     initialAddValue ?? {
@@ -14,6 +19,10 @@ export const AddWorkItem = ({ initialAddValue, handleCloseClick }) => {
       isChecked: false,
     }
   );
+
+  const handleSubmit = (workItem) => {
+    isEditMode ? updateWorkItem(workItem) : insertWorkItem(workItem);
+  };
 
   const handleChange = (event) => {
     setWorkItem({
@@ -65,11 +74,11 @@ export const AddWorkItem = ({ initialAddValue, handleCloseClick }) => {
       <button
         onClick={(event) => {
           event.preventDefault();
-          insertWorkItem(workItem);
+          handleSubmit(workItem);
         }}
         type="submit"
       >
-        Add
+        {isEditMode ? "Save" : "Add"}
       </button>
     </Form>
   );

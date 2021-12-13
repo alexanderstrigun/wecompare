@@ -22,8 +22,8 @@ export const Table = ({
         setData={setData}
         hasCheckbox={hasCheckbox}
         fontSize={"0.5rem"}
-        isTableEditMode={isTableEditMode}
-        handleEditItemClick={handleEditItemClick}
+        isTableEditMode={isTableEditMode} /////////////////////////
+        handleEditItemClick={handleEditItemClick} //////////////////
       />
     </table>
   );

@@ -17,6 +17,7 @@ export const useSort = (data, setData) => {
   };
 
   const sortedData = [...data];
+  console.log(data);
   sortedData.sort((a, b) => {
     if (a[sortConfig.columnKey] < b[sortConfig.columnKey]) {
       return sortConfig.direction === "ascending" ? -1 : 1;

@@ -6,6 +6,7 @@ import { Table } from "../components/Table";
 import { useState } from "react";
 import { EditWorkItem } from "../components/EditWorkItem";
 import { AddWorkItem } from "../components/AddWorkItem";
+import { useEditContext } from "../contexts/editProvider";
 
 export default function Track() {
   //import workitemprovider and distrubte to table components
@@ -16,23 +17,25 @@ export default function Track() {
   };
   const closeOverlay = () => {
     setIsOverlayOpen(false);
-    setIsTableEditMode(false);
+    setIsEditMode(false);
   };
 
+  /////define whether edit items are visible in table
   const [isTableEditMode, setIsTableEditMode] = useState(false);
   const handleEditButtonClick = () => {
     setIsTableEditMode(!isTableEditMode);
   };
 
   const [initialAddValue, setInitialAddValue] = useState(null);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const handleEditButtonSingleItemClick = (id) => {
     const found = workItemList.find((element) => {
       return element.id === id;
     });
+    setIsEditMode(true);
     setInitialAddValue(found);
     setIsOverlayOpen(true);
-    console.log(initialAddValue);
   };
 
   return (
@@ -46,8 +49,9 @@ export default function Track() {
       <button onClick={openOverlay}>Add</button>
       {isOverlayOpen ? (
         <AddWorkItem
-          initialAddValue={initialAddValue}
+          initialAddValue={isEditMode ? initialAddValue : null}
           handleCloseClick={closeOverlay}
+          isEditMode={isEditMode}
         />
       ) : null}
       <EditWorkItem handleClick={handleEditButtonClick} />
