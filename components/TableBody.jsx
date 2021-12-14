@@ -32,7 +32,7 @@ export const TableBody = ({
         <td>{time}</td>
         <td>
           {isTableEditMode ? (
-            <button onClick={() => handleEditItemClick(id)}>Edit</button>
+            <button onClick={() => handleEditItemClick(id, data)}>Edit</button>
           ) : null}
         </td>
       </tr>

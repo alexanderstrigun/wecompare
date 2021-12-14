@@ -11,9 +11,6 @@ export const Footer = () => {
         <Link href="/track">
           <a>Track work</a>
         </Link>
-        <Link href="/add">
-          <a>Add</a>
-        </Link>
       </FooterPosition>
     </>
   );

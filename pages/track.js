@@ -3,41 +3,26 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { useWorkItemContext } from "../contexts/workItemProvider";
 import { Table } from "../components/Table";
-import { useState } from "react";
+
 import { EditWorkItem } from "../components/EditWorkItem";
 import { AddWorkItem } from "../components/AddWorkItem";
-import { useEditContext } from "../contexts/editProvider";
+import { useOverlayContext } from "../contexts/overlayProvider";
 
 export default function Track() {
   //import workitemprovider and distrubte to table components
-  const [workItemList, insertWorkItem, setWorkItemList] = useWorkItemContext();
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-  const openOverlay = () => {
-    setIsOverlayOpen(true);
-  };
-  const closeOverlay = () => {
-    setIsOverlayOpen(false);
-    setIsEditMode(false);
-  };
-
-  /////define whether edit items are visible in table
-  const [isTableEditMode, setIsTableEditMode] = useState(false);
-  const handleEditButtonClick = () => {
-    setIsTableEditMode(!isTableEditMode);
-  };
-
-  const [initialAddValue, setInitialAddValue] = useState(null);
-  const [isEditMode, setIsEditMode] = useState(false);
-
-  const handleEditButtonSingleItemClick = (id) => {
-    const found = workItemList.find((element) => {
-      return element.id === id;
-    });
-    setIsEditMode(true);
-    setInitialAddValue(found);
-    setIsOverlayOpen(true);
-  };
-
+  const [workItemList, insertWorkItem, setWorkItemList, updateWorkItem] =
+    useWorkItemContext();
+  const [
+    isOverlayOpen,
+    openOverlay,
+    closeOverlay,
+    isTableEditMode,
+    handleEditButtonClick,
+    initialAddValue,
+    isEditMode,
+    setIsEditMode,
+    handleEditButtonSingleItemClick,
+  ] = useOverlayContext();
   return (
     <>
       <Head>

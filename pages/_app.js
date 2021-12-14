@@ -1,11 +1,13 @@
 import "../styles/globals.css";
 import { WorkItemProvider } from "../contexts/workItemProvider";
-import { EditProvider } from "../contexts/editProvider";
+import { OverlayProvider } from "../contexts/overlayProvider";
 
 function MyApp({ Component, pageProps }) {
   return (
     <WorkItemProvider>
-      <Component {...pageProps} />
+      <OverlayProvider>
+        <Component {...pageProps} />
+      </OverlayProvider>
     </WorkItemProvider>
   );
 }

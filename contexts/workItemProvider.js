@@ -12,7 +12,6 @@ export const WorkItemProvider = ({ children }) => {
   };
 
   const updateWorkItem = (item) => {
-    console.log(item);
     let index = workItemList.findIndex((element) => {
       return element.id === item.id;
     });

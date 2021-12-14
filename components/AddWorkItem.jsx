@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useWorkItemContext } from "../contexts/workItemProvider";
-import { renderedOptions } from "../utils/categories";
+import { v4 as uuidv4 } from "uuid";
 
 export const AddWorkItem = ({
   initialAddValue,
@@ -30,6 +30,23 @@ export const AddWorkItem = ({
       [event.target.name]: event.target.value,
     });
   };
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    setCategories([
+      { id: uuidv4(), category: "" },
+      ...new Set(
+        workItemList.map((item) => {
+          return { id: uuidv4(), category: item.category };
+        })
+      ),
+    ]);
+  }, [workItemList]);
+
+  const renderedOptions = categories.map(({ category, id }) => {
+    return <option key={id}>{category}</option>;
+  });
 
   return (
     <Form>

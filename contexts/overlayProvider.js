@@ -1,9 +1,18 @@
 import { createContext, useContext } from "react";
 import { useState } from "react";
 
-const editContext = createContext();
+const overlayContext = createContext();
 
-export const EditProvider = ({ children }) => {
+export const OverlayProvider = ({ children }) => {
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const openOverlay = () => {
+    setIsOverlayOpen(true);
+  };
+  const closeOverlay = () => {
+    setIsOverlayOpen(false);
+    setIsEditMode(false);
+  };
+
   /////define whether edit items are visible in table
   const [isTableEditMode, setIsTableEditMode] = useState(false);
   const handleEditButtonClick = () => {
@@ -21,10 +30,12 @@ export const EditProvider = ({ children }) => {
     setInitialAddValue(found);
     setIsOverlayOpen(true);
   };
-
   return (
-    <editContext.Provider
+    <overlayContext.Provider
       value={[
+        isOverlayOpen,
+        openOverlay,
+        closeOverlay,
         isTableEditMode,
         handleEditButtonClick,
         initialAddValue,
@@ -34,10 +45,10 @@ export const EditProvider = ({ children }) => {
       ]}
     >
       {children}
-    </editContext.Provider>
+    </overlayContext.Provider>
   );
 };
 
-export const useEditContext = () => {
-  return useContext(editContext);
+export const useOverlayContext = () => {
+  return useContext(overlayContext);
 };
