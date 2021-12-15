@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useWorkItemContext } from "../contexts/workItemProvider";
 import { v4 as uuidv4 } from "uuid";
+import { Dropdown } from "./Dropdown";
 
 export const AddWorkItem = ({
   initialAddValue,
@@ -31,23 +32,6 @@ export const AddWorkItem = ({
     });
   };
 
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    setCategories([
-      { id: uuidv4(), category: "" },
-      ...new Set(
-        workItemList.map((item) => {
-          return { id: uuidv4(), category: item.category };
-        })
-      ),
-    ]);
-  }, [workItemList]);
-
-  const renderedOptions = categories.map(({ category, id }) => {
-    return <option key={id}>{category}</option>;
-  });
-
   return (
     <Form>
       <button
@@ -69,14 +53,7 @@ export const AddWorkItem = ({
       </div>
       <div>
         <Label htmlFor="category">Category</Label>
-        <select
-          onChange={handleChange}
-          id="category<"
-          name="category"
-          value={workItem.category}
-        >
-          {renderedOptions}
-        </select>
+        <Dropdown></Dropdown>
       </div>
       <div>
         <Label htmlFor="time">Estimated time[min]</Label>
