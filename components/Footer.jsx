@@ -20,7 +20,9 @@ const FooterPosition = styled.div`
   position: fixed;
   bottom: 0px;
   padding: 2% 0% 2% 0%;
+  font-size: 1.5rem;
   width: 100%;
   display: flex;
   justify-content: space-around;
+  background-color: hotpink;
 `;

@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { useWorkItemContext } from "../contexts/workItemProvider";
-import { v4 as uuidv4 } from "uuid";
 import { Dropdown } from "./Dropdown";
 
 export const AddWorkItem = ({
@@ -53,7 +52,11 @@ export const AddWorkItem = ({
       </div>
       <div>
         <Label htmlFor="category">Category</Label>
-        <Dropdown></Dropdown>
+        <Dropdown
+          setWorkItem={setWorkItem}
+          workItem={workItem}
+          workItemList={workItemList}
+        />
       </div>
       <div>
         <Label htmlFor="time">Estimated time[min]</Label>

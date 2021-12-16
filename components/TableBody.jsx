@@ -5,6 +5,7 @@ export const TableBody = ({
   fontSize,
   isTableEditMode,
   handleEditItemClick,
+  isOverlayOpen,
 }) => {
   const toggleChecked = (id) => {
     const copy = [...data];
@@ -24,6 +25,7 @@ export const TableBody = ({
                 toggleChecked(id);
               }}
               checked={isChecked}
+              disabled={isOverlayOpen}
             />
           </td>
         ) : null}
@@ -32,7 +34,12 @@ export const TableBody = ({
         <td>{time}</td>
         <td>
           {isTableEditMode ? (
-            <button onClick={() => handleEditItemClick(id, data)}>Edit</button>
+            <button
+              onClick={() => handleEditItemClick(id, data)}
+              disabled={isOverlayOpen}
+            >
+              Edit
+            </button>
           ) : null}
         </td>
       </tr>

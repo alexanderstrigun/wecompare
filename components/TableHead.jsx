@@ -1,7 +1,13 @@
 import { useCheckAll } from "../utils/useCheckAll";
 import { useSort } from "../utils/useSort";
 
-export const TableHead = ({ data, setData, hasCheckbox, fontSize }) => {
+export const TableHead = ({
+  data,
+  setData,
+  hasCheckbox,
+  fontSize,
+  isOverlayOpen,
+}) => {
   const { allChecked, toggleAllChecked } = useCheckAll(data, setData);
   const { requestSort } = useSort(data, setData);
 
@@ -16,18 +22,30 @@ export const TableHead = ({ data, setData, hasCheckbox, fontSize }) => {
               onChange={() => {
                 toggleAllChecked();
               }}
+              disabled={isOverlayOpen}
             />
           </th>
         ) : null}
         <th>
           What
-          <button onClick={() => requestSort("what")}>test</button>
+          <button onClick={() => requestSort("what")} disabled={isOverlayOpen}>
+            test
+          </button>
         </th>
         <th>
-          Category <button onClick={() => requestSort("category")}>test</button>
+          Category{" "}
+          <button
+            onClick={() => requestSort("category")}
+            disabled={isOverlayOpen}
+          >
+            test
+          </button>
         </th>
         <th>
-          Time <button onClick={() => requestSort("time")}>test</button>
+          Time{" "}
+          <button onClick={() => requestSort("time")} disabled={isOverlayOpen}>
+            test
+          </button>
         </th>
       </tr>
     </thead>

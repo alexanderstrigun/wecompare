@@ -8,6 +8,7 @@ export const Table = ({
   width,
   isTableEditMode,
   handleEditItemClick,
+  isOverlayOpen,
 }) => {
   return (
     <table style={{ width: width }}>
@@ -16,6 +17,7 @@ export const Table = ({
         setData={setData}
         hasCheckbox={hasCheckbox}
         fontSize={"0.5rem"}
+        isOverlayOpen={isOverlayOpen}
       />
       <TableBody
         data={data}
@@ -24,6 +26,7 @@ export const Table = ({
         fontSize={"0.5rem"}
         isTableEditMode={isTableEditMode} /////////////////////////
         handleEditItemClick={handleEditItemClick} //////////////////
+        isOverlayOpen={isOverlayOpen}
       />
     </table>
   );

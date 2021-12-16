@@ -1,3 +1,7 @@
-export const EditWorkItem = ({ handleClick }) => {
-  return <button onClick={handleClick}>Edit</button>;
+export const EditWorkItem = ({ handleClick, isOverlayOpen }) => {
+  return (
+    <button onClick={handleClick} disabled={isOverlayOpen}>
+      Edit
+    </button>
+  );
 };

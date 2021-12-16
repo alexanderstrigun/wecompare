@@ -31,7 +31,9 @@ export default function Track() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header header="Track work"></Header>
-      <button onClick={openOverlay}>Add</button>
+      <button onClick={openOverlay} disabled={isOverlayOpen}>
+        Add
+      </button>
       {isOverlayOpen ? (
         <AddWorkItem
           initialAddValue={isEditMode ? initialAddValue : null}
@@ -39,7 +41,10 @@ export default function Track() {
           isEditMode={isEditMode}
         />
       ) : null}
-      <EditWorkItem handleClick={handleEditButtonClick} />
+      <EditWorkItem
+        handleClick={handleEditButtonClick}
+        isOverlayOpen={isOverlayOpen}
+      />
       <Table
         data={workItemList}
         setData={setWorkItemList}
@@ -47,6 +52,7 @@ export default function Track() {
         width={"100%"}
         isTableEditMode={isTableEditMode}
         handleEditItemClick={handleEditButtonSingleItemClick}
+        isOverlayOpen={isOverlayOpen}
       ></Table>
       <Footer></Footer>
     </>
