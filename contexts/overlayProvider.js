@@ -26,13 +26,12 @@ export const OverlayProvider = ({ children }) => {
     const found = workItemList.find((element) => {
       return element.id === id;
     });
-    console.log(workItemList);
-    console.log(found);
+
     setIsEditMode(true);
     setInitialAddValue(found);
     setIsOverlayOpen(true);
   };
-  console.log(initialAddValue);
+
   return (
     <overlayContext.Provider
       value={[

@@ -23,6 +23,7 @@ export default function Track() {
     setIsEditMode,
     handleEditButtonSingleItemClick,
   ] = useOverlayContext();
+
   return (
     <>
       <Head>
@@ -35,11 +36,13 @@ export default function Track() {
         Add
       </button>
       {isOverlayOpen ? (
-        <AddWorkItem
-          initialAddValue={isEditMode ? initialAddValue : null}
-          handleCloseClick={closeOverlay}
-          isEditMode={isEditMode}
-        />
+        <div style={{ position: "relative", backgroundColor: "black" }}>
+          <AddWorkItem
+            initialAddValue={isEditMode ? initialAddValue : null}
+            handleCloseClick={closeOverlay}
+            isEditMode={isEditMode}
+          />
+        </div>
       ) : null}
       <EditWorkItem
         handleClick={handleEditButtonClick}

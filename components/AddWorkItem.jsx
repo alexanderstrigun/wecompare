@@ -30,7 +30,7 @@ export const AddWorkItem = ({
       [event.target.name]: event.target.value,
     });
   };
-
+  console.log(workItem);
   return (
     <Form>
       <button
@@ -54,8 +54,8 @@ export const AddWorkItem = ({
         <Label htmlFor="category">Category</Label>
         <Dropdown
           setWorkItem={setWorkItem}
-          workItem={workItem}
           workItemList={workItemList}
+          workItem={workItem}
         />
       </div>
       <div>
@@ -82,13 +82,16 @@ export const AddWorkItem = ({
 };
 
 const Form = styled.form`
-  margin: 4% 4% 4% 4%;
+  position: absolute;
+  top: 100px;
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   border-style: solid;
   border-width: 1px;
+  width: 100vw;
   height: 60vh;
 `;
 

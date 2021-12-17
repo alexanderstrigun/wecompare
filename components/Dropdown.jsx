@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { useWorkItemContext } from "../contexts/workItemProvider";
 import { v4 as uuidv4 } from "uuid";
+import styled from "styled-components";
 
-export const Dropdown = ({ setWorkItem, workItem, workItemList }) => {
+export const Dropdown = ({ workItem, workItemList, value, setWorkItem }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
 
   ///////toggle dropdown visibility
   const handleDropdownClick = (event) => {
@@ -25,8 +24,8 @@ export const Dropdown = ({ setWorkItem, workItem, workItemList }) => {
     setCategories([{ id: uuidv4(), category: newCategory }, ...categories]);
   };
   /////click on individual caregory
-  const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
+  const handleIndividualEditClick = (workItem, event) => {
+    setWorkItem({ ...workItem, category: event.target.value });
     setIsDropdownVisible(false);
   };
 
@@ -41,32 +40,29 @@ export const Dropdown = ({ setWorkItem, workItem, workItemList }) => {
     ]);
   }, [workItemList]);
 
-  useEffect(() => {
-    setWorkItem({
-      ...workItem,
-      category: selectedCategory,
-    });
-  }, [selectedCategory]);
-
   const renderedOptions = categories.map(({ category, id }) => {
     return (
-      <button
+      <input
+        type="button"
         key={id}
         onClick={(event) => {
           event.preventDefault();
-          handleCategoryClick(category);
+          handleIndividualEditClick(workItem, event);
         }}
-      >
-        {category}
-      </button>
+        value={category}
+        name="category"
+      />
     );
   });
 
   return (
     <>
-      <button onClick={handleDropdownClick} name={name}>
-        {selectedCategory}
-      </button>
+      <DropdownMenu
+        type="button"
+        onClick={handleDropdownClick}
+        value={workItem.category}
+        name="category"
+      />
 
       {isDropdownVisible ? (
         <div>
@@ -82,3 +78,7 @@ export const Dropdown = ({ setWorkItem, workItem, workItemList }) => {
     </>
   );
 };
+
+const DropdownMenu = styled.input`
+  width: 80%;
+`;
