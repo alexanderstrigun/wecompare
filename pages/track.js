@@ -3,10 +3,10 @@ import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { useWorkItemContext } from "../contexts/workItemProvider";
 import { Table } from "../components/Table";
-
 import { EditWorkItem } from "../components/EditWorkItem";
 import { AddWorkItem } from "../components/AddWorkItem";
 import { useOverlayContext } from "../contexts/overlayProvider";
+import { Search } from "../components/Search";
 
 export default function Track() {
   //import workitemprovider and distrubte to table components
@@ -32,9 +32,16 @@ export default function Track() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header header="Track work"></Header>
-      <button onClick={openOverlay} disabled={isOverlayOpen}>
-        Add
-      </button>
+      <div style={{ display: "flex" }}>
+        <button onClick={openOverlay} disabled={isOverlayOpen}>
+          Add
+        </button>
+        <EditWorkItem
+          handleClick={handleEditButtonClick}
+          isOverlayOpen={isOverlayOpen}
+        />
+        <Search />
+      </div>
       {isOverlayOpen ? (
         <div style={{ position: "relative", backgroundColor: "black" }}>
           <AddWorkItem
@@ -44,10 +51,7 @@ export default function Track() {
           />
         </div>
       ) : null}
-      <EditWorkItem
-        handleClick={handleEditButtonClick}
-        isOverlayOpen={isOverlayOpen}
-      />
+
       <Table
         data={workItemList}
         setData={setWorkItemList}

@@ -30,7 +30,8 @@ export const AddWorkItem = ({
       [event.target.name]: event.target.value,
     });
   };
-  console.log(workItem);
+  const style = { display: "flex", flexDirection: "column" };
+  const width = "60vw";
   return (
     <Form>
       <button
@@ -40,7 +41,7 @@ export const AddWorkItem = ({
       >
         Close
       </button>
-      <div>
+      <div style={style}>
         <Label htmlFor="what">What?</Label>
         <input
           onChange={handleChange}
@@ -48,17 +49,19 @@ export const AddWorkItem = ({
           id="what"
           name="what"
           value={workItem.what}
+          style={{ width: width }}
         />
       </div>
-      <div>
+      <div style={style}>
         <Label htmlFor="category">Category</Label>
         <Dropdown
           setWorkItem={setWorkItem}
           workItemList={workItemList}
           workItem={workItem}
+          width={width}
         />
       </div>
-      <div>
+      <div style={style}>
         <Label htmlFor="time">Estimated time[min]</Label>
         <input
           onChange={handleChange}
@@ -66,6 +69,7 @@ export const AddWorkItem = ({
           id="time"
           name="time"
           value={workItem.time}
+          style={{ width: width }}
         />
       </div>
       <button
@@ -83,8 +87,10 @@ export const AddWorkItem = ({
 
 const Form = styled.form`
   position: absolute;
+  border-radius: 10px;
+  border-color: grey;
   top: 100px;
-  background-color: white;
+  background-color: #e7fbff;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

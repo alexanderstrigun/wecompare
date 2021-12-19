@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
 
-export const Dropdown = ({ workItem, workItemList, value, setWorkItem }) => {
+export const Dropdown = ({ workItem, workItemList, width, setWorkItem }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [categories, setCategories] = useState([]);
   const [newCategory, setNewCategory] = useState("");
@@ -43,6 +43,7 @@ export const Dropdown = ({ workItem, workItemList, value, setWorkItem }) => {
   const renderedOptions = categories.map(({ category, id }) => {
     return (
       <input
+        style={{ display: "flex", flexDirection: "columm" }}
         type="button"
         key={id}
         onClick={(event) => {
@@ -57,28 +58,38 @@ export const Dropdown = ({ workItem, workItemList, value, setWorkItem }) => {
 
   return (
     <>
-      <DropdownMenu
-        type="button"
-        onClick={handleDropdownClick}
-        value={workItem.category}
-        name="category"
-      />
+      <div style={{ position: "relative" }}>
+        <DropdownMenu
+          type="button"
+          onClick={handleDropdownClick}
+          value={workItem.category}
+          name="category"
+          style={{ width: width }}
+        />
 
-      {isDropdownVisible ? (
-        <div>
-          <input
-            onChange={handleInputFieldChange}
-            type="text"
-            value={newCategory}
-          />
-          <button onClick={handleAddClick}>add</button>
-          <div>{renderedOptions}</div>
-        </div>
-      ) : null}
+        {isDropdownVisible ? (
+          <DropdownArea>
+            <div>
+              <input
+                onChange={handleInputFieldChange}
+                type="text"
+                value={newCategory}
+                style={{ borderRadius: "16px" }}
+              />
+              <button onClick={handleAddClick}>add</button>
+            </div>
+            <div>{renderedOptions}</div>
+          </DropdownArea>
+        ) : null}
+      </div>
     </>
   );
 };
 
-const DropdownMenu = styled.input`
-  width: 80%;
+const DropdownMenu = styled.input``;
+const DropdownArea = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
 `;
