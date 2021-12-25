@@ -1,7 +1,12 @@
 import { useWorkItemContext } from "../contexts/workItemProvider";
 import { useEffect, useState } from "react";
+import { Table } from "./Table";
 
-export const Search = () => {
+export const SearchableTable = ({
+  isTableEditMode,
+  handleEditItemClick,
+  isOverlayOpen,
+}) => {
   const [workItemList, insertWorkItem, setWorkItemList, updateWorkItem] =
     useWorkItemContext();
 
@@ -9,7 +14,6 @@ export const Search = () => {
 
   const handleChange = (event) => {
     setSearchField(event.target.value);
-    console.log(filteredWorkItems);
   };
 
   const filteredWorkItems = workItemList.filter((workItem) => {
@@ -23,6 +27,16 @@ export const Search = () => {
   return (
     <>
       <input type="text" onChange={handleChange} />
+      <Table
+        data={workItemList}
+        setData={setWorkItemList}
+        filteredWorkItems={filteredWorkItems}
+        hasCheckbox={true}
+        width={"100%"}
+        isTableEditMode={isTableEditMode}
+        handleEditItemClick={handleEditItemClick}
+        isOverlayOpen={isOverlayOpen}
+      ></Table>
     </>
   );
 };

@@ -6,7 +6,7 @@ import { Table } from "../components/Table";
 import { EditWorkItem } from "../components/EditWorkItem";
 import { AddWorkItem } from "../components/AddWorkItem";
 import { useOverlayContext } from "../contexts/overlayProvider";
-import { Search } from "../components/Search";
+import { SearchableTable } from "../components/SearchableTable";
 
 export default function Track() {
   //import workitemprovider and distrubte to table components
@@ -40,7 +40,6 @@ export default function Track() {
           handleClick={handleEditButtonClick}
           isOverlayOpen={isOverlayOpen}
         />
-        <Search />
       </div>
       {isOverlayOpen ? (
         <div style={{ position: "relative", backgroundColor: "black" }}>
@@ -52,7 +51,7 @@ export default function Track() {
         </div>
       ) : null}
 
-      <Table
+      <SearchableTable
         data={workItemList}
         setData={setWorkItemList}
         hasCheckbox={true}
@@ -60,7 +59,7 @@ export default function Track() {
         isTableEditMode={isTableEditMode}
         handleEditItemClick={handleEditButtonSingleItemClick}
         isOverlayOpen={isOverlayOpen}
-      ></Table>
+      ></SearchableTable>
       <Footer></Footer>
     </>
   );

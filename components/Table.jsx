@@ -4,6 +4,7 @@ import { TableHead } from "./TableHead";
 export const Table = ({
   data,
   setData,
+  filteredWorkItems,
   hasCheckbox,
   width,
   isTableEditMode,
@@ -11,23 +12,27 @@ export const Table = ({
   isOverlayOpen,
 }) => {
   return (
-    <table style={{ width: width }}>
-      <TableHead
-        data={data}
-        setData={setData}
-        hasCheckbox={hasCheckbox}
-        fontSize={"0.5rem"}
-        isOverlayOpen={isOverlayOpen}
-      />
-      <TableBody
-        data={data}
-        setData={setData}
-        hasCheckbox={hasCheckbox}
-        fontSize={"0.5rem"}
-        isTableEditMode={isTableEditMode} /////////////////////////
-        handleEditItemClick={handleEditItemClick} //////////////////
-        isOverlayOpen={isOverlayOpen}
-      />
-    </table>
+    <>
+      <table style={{ width: width }}>
+        <TableHead
+          data={data}
+          setData={setData}
+          filteredWorkItems={filteredWorkItems}
+          hasCheckbox={hasCheckbox}
+          fontSize={"0.5rem"}
+          isOverlayOpen={isOverlayOpen}
+        />
+        <TableBody
+          data={data}
+          setData={setData}
+          filteredWorkItems={filteredWorkItems}
+          hasCheckbox={hasCheckbox}
+          fontSize={"0.5rem"}
+          isTableEditMode={isTableEditMode} /////////////////////////
+          handleEditItemClick={handleEditItemClick} //////////////////
+          isOverlayOpen={isOverlayOpen}
+        />
+      </table>
+    </>
   );
 };

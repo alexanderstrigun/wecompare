@@ -4,11 +4,16 @@ import { useSort } from "../utils/useSort";
 export const TableHead = ({
   data,
   setData,
+  filteredWorkItems,
   hasCheckbox,
   fontSize,
   isOverlayOpen,
 }) => {
-  const { allChecked, toggleAllChecked } = useCheckAll(data, setData);
+  const { allChecked, toggleAllChecked } = useCheckAll(
+    data,
+    filteredWorkItems,
+    setData
+  );
   const { requestSort } = useSort(data, setData);
 
   return (

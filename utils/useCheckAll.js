@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useCheckAll = (data, setData) => {
+export const useCheckAll = (data, filteredData, setData) => {
   const [allChecked, setAllChecked] = useState(false);
 
   const toggleAllChecked = () => {
@@ -8,7 +8,7 @@ export const useCheckAll = (data, setData) => {
   };
 
   useEffect(() => {
-    const mappedWithCheckBoxes = data.map((item) => {
+    const mappedWithCheckBoxes = filteredData.map((item) => {
       if (allChecked === true) {
         return { ...item, isChecked: true };
       } else {
@@ -16,7 +16,15 @@ export const useCheckAll = (data, setData) => {
       }
     });
 
-    setData(mappedWithCheckBoxes);
+    const test = data.map((item) => {
+      const a = mappedWithCheckBoxes.find((o) => {
+        if (o.id === item.id) return o;
+      });
+      return a || item;
+    });
+    console.log(test);
+
+    setData(test);
   }, [allChecked]);
 
   return {
