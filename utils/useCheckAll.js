@@ -22,7 +22,6 @@ export const useCheckAll = (data, filteredData, setData) => {
       });
       return a || item;
     });
-    console.log(test);
 
     setData(test);
   }, [allChecked]);

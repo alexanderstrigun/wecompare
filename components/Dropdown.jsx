@@ -30,10 +30,15 @@ export const Dropdown = ({ workItem, workItemList, width, setWorkItem }) => {
   };
 
   useEffect(() => {
+    const categoriess = new Set();
+    workItemList.forEach((workItem) => {
+      categoriess.add(workItem.category);
+    });
+    console.log(categoriess);
     setCategories([
       { id: uuidv4(), category: "" },
       ...new Set(
-        workItemList.map((item) => {
+        workItemList.forEach((item) => {
           return { id: uuidv4(), category: item.category };
         })
       ),
