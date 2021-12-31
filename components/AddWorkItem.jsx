@@ -35,6 +35,7 @@ export const AddWorkItem = ({
   return (
     <Form>
       <button
+        type="button"
         onClick={() => {
           handleCloseClick();
         }}

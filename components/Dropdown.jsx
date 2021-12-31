@@ -21,8 +21,18 @@ export const Dropdown = ({ workItem, workItemList, width, setWorkItem }) => {
   /////when user clicks add button, categories are set
   const handleAddClick = (event) => {
     event.preventDefault();
-    setCategories([{ id: uuidv4(), category: newCategory }, ...categories]);
+    const uniqueCategories = new Set();
+    [{ id: uuidv4(), category: newCategory }, ...categories].forEach((item) => {
+      uniqueCategories.add(item.category);
+    });
+    const test = Array.from(uniqueCategories).map((uniqueCategory) => {
+      return { id: uuidv4(), category: uniqueCategory };
+    });
+    console.log(test);
+    setCategories(test);
   };
+
+  console.log(workItemList);
   /////click on individual caregory
   const handleIndividualEditClick = (workItem, event) => {
     setWorkItem({ ...workItem, category: event.target.value });
@@ -30,19 +40,15 @@ export const Dropdown = ({ workItem, workItemList, width, setWorkItem }) => {
   };
 
   useEffect(() => {
-    const categoriess = new Set();
+    const uniqueCategories = new Set();
     workItemList.forEach((workItem) => {
-      categoriess.add(workItem.category);
+      uniqueCategories.add(workItem.category);
     });
-    console.log(categoriess);
-    setCategories([
-      { id: uuidv4(), category: "" },
-      ...new Set(
-        workItemList.forEach((item) => {
-          return { id: uuidv4(), category: item.category };
-        })
-      ),
-    ]);
+    const test = Array.from(uniqueCategories).map((uniqueCategory) => {
+      return { id: uuidv4(), category: uniqueCategory };
+    });
+
+    setCategories([{ id: uuidv4(), category: "" }, ...test]);
   }, [workItemList]);
 
   const renderedOptions = categories.map(({ category, id }) => {
