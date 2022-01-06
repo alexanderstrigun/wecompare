@@ -28,11 +28,10 @@ export const Dropdown = ({ workItem, workItemList, width, setWorkItem }) => {
     const test = Array.from(uniqueCategories).map((uniqueCategory) => {
       return { id: uuidv4(), category: uniqueCategory };
     });
-    console.log(test);
+
     setCategories(test);
   };
 
-  console.log(workItemList);
   /////click on individual caregory
   const handleIndividualEditClick = (workItem, event) => {
     setWorkItem({ ...workItem, category: event.target.value });

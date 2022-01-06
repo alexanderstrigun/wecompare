@@ -2,16 +2,19 @@ import Head from "next/head";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
 import { useWorkItemContext } from "../contexts/workItemProvider";
-import { Table } from "../components/Table";
 import { EditWorkItem } from "../components/EditWorkItem";
 import { AddWorkItem } from "../components/AddWorkItem";
 import { useOverlayContext } from "../contexts/overlayProvider";
 import { SearchableTable } from "../components/SearchableTable";
+import { useTrackItemContext } from "../contexts/trackItemProvider";
 
 export default function Track() {
   //import workitemprovider and distrubte to table components
   const [workItemList, insertWorkItem, setWorkItemList, updateWorkItem] =
     useWorkItemContext();
+
+  const [trackItemList, insertTrackItem] = useTrackItemContext();
+
   const [
     isOverlayOpen,
     openOverlay,
@@ -23,6 +26,8 @@ export default function Track() {
     setIsEditMode,
     handleEditButtonSingleItemClick,
   ] = useOverlayContext();
+
+  const countSelected = workItemList.filter((item) => item.isChecked === true);
 
   return (
     <>
@@ -60,6 +65,15 @@ export default function Track() {
         handleEditItemClick={handleEditButtonSingleItemClick}
         isOverlayOpen={isOverlayOpen}
       ></SearchableTable>
+      {countSelected.length ? (
+        <button
+          onClick={() => {
+            insertTrackItem(countSelected);
+          }}
+        >
+          Add to tracker
+        </button>
+      ) : null}
       <Footer></Footer>
     </>
   );

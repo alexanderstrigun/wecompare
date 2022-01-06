@@ -8,6 +8,8 @@ export const TableHead = ({
   hasCheckbox,
   fontSize,
   isOverlayOpen,
+  border,
+  borderCollapse,
 }) => {
   const { allChecked, toggleAllChecked } = useCheckAll(
     data,
@@ -20,7 +22,7 @@ export const TableHead = ({
     <thead>
       <tr style={{ fontSize: fontSize }}>
         {hasCheckbox ? (
-          <th>
+          <th style={{ borderBottom: border, borderCollapse: borderCollapse }}>
             <input
               type="checkbox"
               checked={allChecked}
@@ -31,13 +33,13 @@ export const TableHead = ({
             />
           </th>
         ) : null}
-        <th>
+        <th style={{ borderBottom: border }}>
           What
           <button onClick={() => requestSort("what")} disabled={isOverlayOpen}>
             test
           </button>
         </th>
-        <th>
+        <th style={{ borderBottom: border }}>
           Category{" "}
           <button
             onClick={() => requestSort("category")}
@@ -46,7 +48,7 @@ export const TableHead = ({
             test
           </button>
         </th>
-        <th>
+        <th style={{ borderBottom: border }}>
           Time{" "}
           <button onClick={() => requestSort("time")} disabled={isOverlayOpen}>
             test

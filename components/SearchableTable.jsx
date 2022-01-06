@@ -7,8 +7,13 @@ export const SearchableTable = ({
   handleEditItemClick,
   isOverlayOpen,
 }) => {
-  const [workItemList, insertWorkItem, setWorkItemList, updateWorkItem] =
-    useWorkItemContext();
+  const [
+    workItemList,
+    insertWorkItem,
+    setWorkItemList,
+    updateWorkItem,
+    removeWorkItem,
+  ] = useWorkItemContext();
 
   const [searchField, setSearchField] = useState("");
 
@@ -33,9 +38,11 @@ export const SearchableTable = ({
         filteredWorkItems={filteredWorkItems}
         hasCheckbox={true}
         width={"100%"}
+        padding={"0rem"}
         isTableEditMode={isTableEditMode}
         handleEditItemClick={handleEditItemClick}
         isOverlayOpen={isOverlayOpen}
+        removeWorkItem={removeWorkItem}
       ></Table>
     </>
   );

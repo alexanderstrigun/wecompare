@@ -1,10 +1,20 @@
 import Head from "next/head";
-import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { BarChart } from "../components/BarChart";
 
 export default function Home() {
+  const myData = [
+    {
+      label: "Apples",
+      value: 10,
+    },
+    {
+      label: "Oranges",
+      value: 17,
+    },
+  ];
+
   return (
     <>
       <Head>
@@ -13,6 +23,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header header="Analyze"></Header>
+      <BarChart ui={myData} />
       <Footer></Footer>
     </>
   );

@@ -20,9 +20,21 @@ export const WorkItemProvider = ({ children }) => {
     setWorkItemList([...front, item, ...back]);
   };
 
+  const removeWorkItem = (index) => {
+    const front = workItemList.slice(0, index);
+    const back = workItemList.slice(index + 1, workItemList.length);
+    setWorkItemList([...front, ...back]);
+  };
+
   return (
     <workItemContext.Provider
-      value={[workItemList, insertWorkItem, setWorkItemList, updateWorkItem]}
+      value={[
+        workItemList,
+        insertWorkItem,
+        setWorkItemList,
+        updateWorkItem,
+        removeWorkItem,
+      ]}
     >
       {children}
     </workItemContext.Provider>
