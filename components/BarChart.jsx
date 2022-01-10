@@ -4,16 +4,33 @@ import { Bar } from "react-chartjs-2";
 import { useEffect } from "react";
 
 export const BarChart = ({ ui }) => {
+  const uniqueWeekDays = new Set();
+
+  ui.forEach((item) => {
+    uniqueWeekDays.add(item.dayOfWeek);
+  });
+
+  const uniqueWeekDaysMapped = Array.from(uniqueWeekDays).map(
+    (uniqueWeekDay) => {
+      let summedUpTime = 0;
+      let test = ui.forEach((item) => {
+        if (uniqueWeekDay === item.dayOfWeek) {
+          summedUpTime += item.time;
+        }
+      });
+      return { uniqueWeekDay: uniqueWeekDay, summedUpTime: summedUpTime };
+    }
+  );
+
   const data = {
-    labels: ui.map((item) => item.label),
+    labels: uniqueWeekDaysMapped.map((item) => item.uniqueWeekDay),
 
     datasets: [
       {
-        label: "Popularity of colours",
-        data: ui.map((item) => item.value),
+        data: uniqueWeekDaysMapped.map((item) => item.summedUpTime),
 
         backgroundColor: ["red"],
-        borderWidth: 1,
+        borderWidth: 3,
       },
     ],
   };
@@ -26,8 +43,8 @@ export const BarChart = ({ ui }) => {
         options={{
           plugins: {
             title: {
-              display: true,
-              text: "Cryptocurrency prices",
+              display: false,
+              text: "test",
             },
             legend: {
               display: false,
