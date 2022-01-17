@@ -9,9 +9,7 @@ export const useLocalStorage = (key) => {
     const dataLocalStorage = localStorage.getItem(key);
     if (dataLocalStorage) {
       setData(JSON.parse(dataLocalStorage));
-    } else {
-      setData(mappedDefaultWorkItems);
-    }
+    } else setData(mappedDefaultWorkItems);
   }, []);
 
   useEffect(() => {

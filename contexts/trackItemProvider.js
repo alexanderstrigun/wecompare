@@ -9,7 +9,6 @@ export const TrackItemProvider = ({ children }) => {
   const [trackItemList, setTrackItemList] = useLocalStorageTrack("trackItems");
 
   const insertTrackItem = (filteredWorkItems) => {
-    console.log(filteredWorkItems);
     const filteredWorkItemsMapped = filteredWorkItems.map((item) => {
       return {
         what: item.what,
@@ -22,7 +21,7 @@ export const TrackItemProvider = ({ children }) => {
         dayOfWeek: moment().day(),
       };
     });
-    console.log(...filteredWorkItemsMapped);
+
     setTrackItemList([...filteredWorkItemsMapped, ...trackItemList]);
   };
 

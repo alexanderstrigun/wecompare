@@ -1,6 +1,6 @@
 ////try to put the useeffects for local storage into custom hook. no success yet
 import { useState, useEffect } from "react";
-import { mappedDefaultWorkItems } from "./defaultWorkItems";
+import { defaultTrackItems } from "./defaultTrackItems";
 
 export const useLocalStorageTrack = (key) => {
   const [data, setData] = useState([]);
@@ -9,7 +9,7 @@ export const useLocalStorageTrack = (key) => {
     const dataLocalStorage = localStorage.getItem(key);
     if (dataLocalStorage) {
       setData(JSON.parse(dataLocalStorage));
-    } else setData([]);
+    } else setData(defaultTrackItems);
   }, []);
 
   useEffect(() => {

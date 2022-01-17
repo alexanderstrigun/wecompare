@@ -5,7 +5,6 @@ import { BarChart } from "../components/BarChart";
 import { useTrackItemContext } from "../contexts/trackItemProvider";
 export default function Home() {
   const [trackItemList, insertTrackItem] = useTrackItemContext();
-  console.l;
 
   return (
     <>
