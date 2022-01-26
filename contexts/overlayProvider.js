@@ -13,6 +13,19 @@ export const OverlayProvider = ({ children }) => {
     setIsEditMode(false);
   };
 
+  const [isAddToTrackerOverlayOpen, setIsAddToTrackerOverlayOpen] =
+    useState(false);
+
+  const openAddToTrackerOverlay = () => {
+    setIsAddToTrackerOverlayOpen(true);
+  };
+
+  const closeAddToTrackerOverlay = () => {
+    setIsEditMode(false);
+    setIsOverlayOpen(false);
+    setIsAddToTrackerOverlayOpen(false);
+  };
+
   /////define whether edit items are visible in table
   const [isTableEditMode, setIsTableEditMode] = useState(false);
   const handleEditButtonClick = () => {
@@ -44,6 +57,9 @@ export const OverlayProvider = ({ children }) => {
         isEditMode,
         setIsEditMode,
         handleEditButtonSingleItemClick,
+        isAddToTrackerOverlayOpen,
+        openAddToTrackerOverlay,
+        closeAddToTrackerOverlay,
       ]}
     >
       {children}

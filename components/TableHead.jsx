@@ -1,5 +1,7 @@
 import { useCheckAll } from "../utils/useCheckAll";
 import { useSort } from "../utils/useSort";
+import styled from "styled-components";
+import { FaSort } from "react-icons/fa";
 
 export const TableHead = ({
   data,
@@ -35,26 +37,40 @@ export const TableHead = ({
         ) : null}
         <th style={{ borderBottom: border }}>
           What
-          <button onClick={() => requestSort("what")} disabled={isOverlayOpen}>
-            test
-          </button>
+          <SortButton
+            onClick={() => requestSort("what")}
+            disabled={isOverlayOpen}
+          >
+            <FaSort></FaSort>
+          </SortButton>
         </th>
         <th style={{ borderBottom: border }}>
           Category{" "}
-          <button
+          <SortButton
             onClick={() => requestSort("category")}
             disabled={isOverlayOpen}
           >
-            test
-          </button>
+            <FaSort></FaSort>
+          </SortButton>
         </th>
         <th style={{ borderBottom: border }}>
           Time{" "}
-          <button onClick={() => requestSort("time")} disabled={isOverlayOpen}>
-            test
-          </button>
+          <SortButton
+            onClick={() => requestSort("time")}
+            disabled={isOverlayOpen}
+          >
+            <FaSort></FaSort>
+          </SortButton>
         </th>
       </tr>
     </thead>
   );
 };
+
+const SortButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+  border-radius: 20px;
+`;

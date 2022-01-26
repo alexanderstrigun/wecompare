@@ -7,6 +7,9 @@ import { AddWorkItem } from "../components/AddWorkItem";
 import { useOverlayContext } from "../contexts/overlayProvider";
 import { SearchableTable } from "../components/SearchableTable";
 import { useTrackItemContext } from "../contexts/trackItemProvider";
+import { GrAdd } from "react-icons/gr";
+import styled from "styled-components";
+import { AddToTracker } from "../components/AddToTracker";
 
 export default function Track() {
   //import workitemprovider and distrubte to table components
@@ -25,6 +28,9 @@ export default function Track() {
     isEditMode,
     setIsEditMode,
     handleEditButtonSingleItemClick,
+    isAddToTrackerOverlayOpen,
+    openAddToTrackerOverlay,
+    closeAddToTrackerOverlay,
   ] = useOverlayContext();
 
   const countSelected = workItemList.filter((item) => item.isChecked === true);
@@ -38,12 +44,16 @@ export default function Track() {
       </Head>
       <Header header="Track work"></Header>
       <div style={{ display: "flex" }}>
-        <button onClick={openOverlay} disabled={isOverlayOpen}>
-          Add
-        </button>
+        <AddButton
+          onClick={openOverlay}
+          disabled={isOverlayOpen || isAddToTrackerOverlayOpen}
+        >
+          <GrAdd />
+        </AddButton>
         <EditWorkItem
           handleClick={handleEditButtonClick}
           isOverlayOpen={isOverlayOpen}
+          isAddToTrackerOverlayOpen={isAddToTrackerOverlayOpen}
         />
       </div>
       {isOverlayOpen ? (
@@ -52,6 +62,15 @@ export default function Track() {
             initialAddValue={isEditMode ? initialAddValue : null}
             handleCloseClick={closeOverlay}
             isEditMode={isEditMode}
+          />
+        </div>
+      ) : null}
+
+      {isAddToTrackerOverlayOpen ? (
+        <div style={{ position: "relative", backgroundColor: "black" }}>
+          <AddToTracker
+            countSelected={countSelected}
+            handleClose={closeAddToTrackerOverlay}
           />
         </div>
       ) : null}
@@ -68,8 +87,10 @@ export default function Track() {
       {countSelected.length ? (
         <button
           onClick={() => {
+            openAddToTrackerOverlay();
             insertTrackItem(countSelected);
           }}
+          disabled={isOverlayOpen}
         >
           Add to tracker
         </button>
@@ -78,3 +99,11 @@ export default function Track() {
     </>
   );
 }
+
+const AddButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+  border-radius: 20px;
+`;

@@ -1,3 +1,7 @@
+import { GrEdit } from "react-icons/gr";
+import { GrTrash } from "react-icons/gr";
+import styled from "styled-components";
+
 export const TableBody = ({
   data,
   setData,
@@ -38,18 +42,18 @@ export const TableBody = ({
           <td>
             {isTableEditMode ? (
               <div style={{ display: "flex" }}>
-                <button
+                <Button
                   onClick={() => handleEditItemClick(id, data)}
                   disabled={isOverlayOpen}
                 >
-                  Edit
-                </button>
-                <button
+                  <GrEdit></GrEdit>
+                </Button>
+                <Button
                   onClick={() => handleRemoveClick(index)}
                   disabled={isOverlayOpen}
                 >
-                  Remove
-                </button>
+                  <GrTrash></GrTrash>
+                </Button>
               </div>
             ) : null}
           </td>
@@ -60,3 +64,11 @@ export const TableBody = ({
 
   return <tbody>{tableBodyRows}</tbody>;
 };
+
+const Button = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+  border-radius: 20px;
+`;

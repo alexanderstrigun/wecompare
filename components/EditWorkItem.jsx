@@ -1,7 +1,25 @@
-export const EditWorkItem = ({ handleClick, isOverlayOpen }) => {
+import { GrEdit } from "react-icons/gr";
+import styled from "styled-components";
+
+export const EditWorkItem = ({
+  handleClick,
+  isOverlayOpen,
+  isAddToTrackerOverlayOpen,
+}) => {
   return (
-    <button onClick={handleClick} disabled={isOverlayOpen}>
-      Edit
-    </button>
+    <EditButton
+      onClick={handleClick}
+      disabled={isOverlayOpen || isAddToTrackerOverlayOpen}
+    >
+      <GrEdit />
+    </EditButton>
   );
 };
+
+const EditButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: inherit;
+  border-radius: 20px;
+`;

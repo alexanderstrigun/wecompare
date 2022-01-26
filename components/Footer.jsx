@@ -6,7 +6,7 @@ export const Footer = () => {
     <>
       <FooterPosition>
         <Link href="/">
-          <a>Analyze</a>
+          <a>Dashboard</a>
         </Link>
         <Link href="/track">
           <a>Track work</a>

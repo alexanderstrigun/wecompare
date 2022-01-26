@@ -16,29 +16,42 @@ export const SearchableTable = ({
   ] = useWorkItemContext();
 
   const [searchField, setSearchField] = useState("");
+  const [hasFocus, setFocus] = useState(false);
 
   const handleChange = (event) => {
     setSearchField(event.target.value);
   };
 
+  const handleFocus = () => {
+    setFocus(true);
+  };
+  const handleBlur = () => {
+    setFocus(false);
+  };
+
   const filteredWorkItems = workItemList.filter((workItem) => {
     return (
       workItem.what.toLowerCase().includes(searchField.toLowerCase()) ||
-      workItem.category.toLowerCase().includes(searchField.toLowerCase()) ||
-      workItem.time.toLowerCase().includes(searchField.toLowerCase())
+      workItem.category.toLowerCase().includes(searchField.toLowerCase())
     );
   });
 
   return (
     <>
-      <input type="text" onChange={handleChange} />
+      <input
+        type="text"
+        onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        placeholder={hasFocus ? "" : "Search work item"}
+      />
       <Table
         data={workItemList}
         setData={setWorkItemList}
         filteredWorkItems={filteredWorkItems}
         hasCheckbox={true}
         width={"100%"}
-        padding={"0rem"}
+        padding={"1rem"}
         isTableEditMode={isTableEditMode}
         handleEditItemClick={handleEditItemClick}
         isOverlayOpen={isOverlayOpen}
