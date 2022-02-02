@@ -6,7 +6,7 @@ import { EditWorkItem } from "../components/EditWorkItem";
 import { AddWorkItem } from "../components/AddWorkItem";
 import { useOverlayContext } from "../contexts/overlayProvider";
 import { SearchableTable } from "../components/SearchableTable";
-import { useTrackItemContext } from "../contexts/trackItemProvider";
+
 import { GrAdd } from "react-icons/gr";
 import styled from "styled-components";
 import { AddToTracker } from "../components/AddToTracker";
@@ -15,8 +15,6 @@ export default function Track() {
   //import workitemprovider and distrubte to table components
   const [workItemList, insertWorkItem, setWorkItemList, updateWorkItem] =
     useWorkItemContext();
-
-  const [trackItemList, insertTrackItem] = useTrackItemContext();
 
   const [
     isOverlayOpen,
@@ -33,7 +31,12 @@ export default function Track() {
     closeAddToTrackerOverlay,
   ] = useOverlayContext();
 
-  const countSelected = workItemList.filter((item) => item.isChecked === true);
+  //filter all checked items and copy the individual objects via map so that no reference prob occurs
+  const countSelected = workItemList
+    .filter((item) => item.isChecked === true)
+    .map((item) => {
+      return { ...item };
+    });
 
   return (
     <>
@@ -88,7 +91,6 @@ export default function Track() {
         <button
           onClick={() => {
             openAddToTrackerOverlay();
-            insertTrackItem(countSelected);
           }}
           disabled={isOverlayOpen}
         >

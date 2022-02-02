@@ -21,7 +21,7 @@ export const TrackItemProvider = ({ children }) => {
         dayOfWeek: moment().day(),
       };
     });
-
+    //spread all filtered workitems and add them on top of allready existing trackitems (also spreaded)
     setTrackItemList([...filteredWorkItemsMapped, ...trackItemList]);
   };
 

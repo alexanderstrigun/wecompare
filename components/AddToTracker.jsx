@@ -1,31 +1,72 @@
 import styled from "styled-components";
+import { useTrackItemContext } from "../contexts/trackItemProvider";
 import { useState } from "react";
 export const AddToTracker = ({ countSelected, handleClose }) => {
-  const [test, setTest] = useState(countSelected);
+  const [trackItemList, insertTrackItem] = useTrackItemContext();
+  const [countSelectEdited, setCountSelectEdited] = useState(countSelected);
 
-  const mappedCounSelected = countSelected.map((item) => {
+  const handlePlusClick = (index) => {
+    const copy = [...countSelectEdited];
+    copy[index].time += 1;
+    setCountSelectEdited(copy);
+  };
+  console.log(countSelectEdited);
+  const handleMinusClick = (index) => {
+    const copy = [...countSelectEdited];
+    copy[index].time -= 1;
+    setCountSelectEdited(copy);
+  };
+
+  const handleCancelClick = () => {
+    handleClose(), setCountSelectEdited(countSelected);
+  };
+
+  const handleInputChange = (event, index) => {
+    const copy = [...countSelectEdited];
+    copy[index].time = event.target.value;
+    setCountSelectEdited(copy);
+  };
+  console.log(countSelectEdited);
+  const mappedCountSelectedNext = countSelectEdited.map((item, index) => {
     return (
-      <>
-        <li
-          style={{
-            listStyleType: "none",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          {item.what} ({item.category}){" "}
-          <div>
-            <button>+</button>
-            <input style={{ width: "2rem" }}></input>
-            <button>-</button>
-          </div>
-        </li>
-      </>
+      <li
+        key={item.id}
+        style={{
+          listStyleType: "none",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
+        {item.what} ({item.category}){" "}
+        <div>
+          <button
+            onClick={() => {
+              handlePlusClick(index);
+            }}
+          >
+            +
+          </button>
+          <input
+            style={{ width: "2rem" }}
+            value={item.time}
+            onChange={(event) => {
+              handleInputChange(event, index);
+            }}
+          ></input>
+          <button
+            onClick={() => {
+              handleMinusClick(index);
+            }}
+          >
+            -
+          </button>
+        </div>
+      </li>
     );
   });
   return (
     <Div>
-      <ul>{mappedCounSelected}</ul>
+      <ul>{mappedCountSelectedNext}</ul>
       <div
         style={{
           display: "flex",
@@ -33,8 +74,15 @@ export const AddToTracker = ({ countSelected, handleClose }) => {
           justifyContent: "space-around",
         }}
       >
-        <button>Add</button>
-        <button onClick={() => handleClose()}>Cancel</button>
+        <button
+          onClick={() => {
+            insertTrackItem(countSelectEdited);
+            handleCancelClick();
+          }}
+        >
+          Add
+        </button>
+        <button onClick={() => handleCancelClick()}>Cancel</button>
       </div>
     </Div>
   );

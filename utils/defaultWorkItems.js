@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { uuid } from "uuidv4";
+
 const defaultWorkItems = [
   { what: "Saugen", category: "Wohnzimmer + Küche", time: 9 },
   { what: "Saugen", category: "Unter coauch", time: 9 },
